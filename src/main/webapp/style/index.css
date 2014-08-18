@@ -1,0 +1,48 @@
+
+.main{
+    width: 1282px;
+    height: 1000px;
+    margin: 20px auto;
+    background-color: darkgray;
+}
+
+.contactInformation{
+    width: 200px;
+    height: 300px;
+    background-color: burlywood;
+    position: inherit;
+    margin-left: 10px;
+    /*margin-top: 650px;*/
+    margin-bottom: 10px;
+    bottom: 10px;
+
+}
+
+.banner{
+    margin: 10px auto;
+    width: 600px;
+    height: 400px;
+    background-color: blueviolet;
+}
+
+.authentication{
+    width: 200px;
+    margin: 10px;
+    background-color: cadetblue;
+    float: right;
+
+}
+
+.registration{
+    margin: 10px;
+}
+
+label{
+    color: black;
+    font-size: 15px;
+    font-family: Times new Roman;
+}
+
+text{
+    margin: 2px;
+}
