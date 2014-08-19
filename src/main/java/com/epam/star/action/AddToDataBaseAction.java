@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class AddToDataBaseAction implements Action {
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+    public String execute(HttpServletRequest request) throws SQLException{
         return null;
     }
 }

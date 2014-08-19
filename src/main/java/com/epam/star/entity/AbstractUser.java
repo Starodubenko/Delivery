@@ -9,8 +9,9 @@ public abstract class AbstractUser extends AbstractEntity {
     private String address;
     private String telephone;
 
-    protected AbstractUser(int id) {
-        super(id);
+
+    protected AbstractUser() {
+        super();
     }
 
     protected AbstractUser(int id, String login, String password, String firstName, String lastName, String middleName, String address, String telephone) {
@@ -79,4 +80,6 @@ public abstract class AbstractUser extends AbstractEntity {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+
 }

@@ -4,7 +4,7 @@
 	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <display-name>Microelectronic app</display-name>
+    <display-name>Delivery</display-name>
 
 
     <!--
@@ -24,13 +24,32 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
-    <filter>
-        <filter-name>Encoding</filter-name>
-        <filter-class>com.epam.star.filter.Encoding</filter-class>
-    </filter>
+    <!--<filter>-->
+        <!--<filter-name>Encoding</filter-name>-->
+        <!--<filter-class>com.epam.star.filter.Encoding</filter-class>-->
+    <!--</filter>-->
 
-    <filter-mapping>
-        <filter-name>Encoding</filter-name>
-        <url-pattern>*</url-pattern>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>Encoding</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--
+if you map them here they will be applied on mapped url-pattern,
+т.е. он щас на все ?
+нет блин, только на звездочку (это сарказм блин)
+ты когда нибудь видел урл в виде звездочки нет
+а как на все ? ясно, и еще на счет Listener
+с ними все отлично, они работают, в другом вопрос,
+
+рисуй тут
+
+впитывай
+ok
+всё? ,да вроде все
+-->
+
+    <listener>
+        <listener-class>com.epam.star.listener.ProjectListener</listener-class>
+    </listener>
 </web-app>

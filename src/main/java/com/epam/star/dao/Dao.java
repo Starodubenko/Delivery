@@ -5,7 +5,7 @@ import com.epam.star.entity.AbstractEntity;
 public interface Dao<T extends AbstractEntity>{
 
     public T getElement(int ID);
-    public T addElement(T e);
+    public void addElement(T e);
     public T deleteElement(int ID);
     public T updateElement(int ID);
 }

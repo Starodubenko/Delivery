@@ -21,7 +21,6 @@ public class GetDataFromDataBaseAction implements Action {
         if (tableName != null && tableName != "") {
 
         Connection connection = ConnectionPool.getConnectionFromPool("jdbc:h2:tcp://localhost/F:/Видео Epam/db/FPDB","Rody","1");
-//        Connection connectionn = ;
         Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM " + tableName);

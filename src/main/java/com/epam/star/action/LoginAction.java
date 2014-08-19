@@ -12,7 +12,7 @@ public class LoginAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+    public String execute(HttpServletRequest request) throws SQLException {
         String tableName = request.getParameter("TableName");
         System.out.println(tableName);
         if (tableName != null && tableName != "") {

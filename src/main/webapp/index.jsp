@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -84,13 +85,13 @@
     </div>
 
     <div>
-        <form action="${pageContext.request.contextPath}/controller" method="post">
+        <form action="${pageContext.request.contextPath}/controller">
             <input type="submit" value="Go to DataBase">
             <ul class="pager">
                 <li class="previous"><a href="#">&larr; Older</a></li>
                 <li class="next"><a href="#">Newer &rarr;</a></li>
             </ul>
-            <input type="hidden" name="actionName" value="opendbaction">
+            <input type="hidden" name="actionName" value="DeleteFromDataBaseAction"> //
         </form>
     </div>
 

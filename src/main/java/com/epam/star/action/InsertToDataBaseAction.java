@@ -14,7 +14,7 @@ public class InsertToDataBaseAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(InsertToDataBaseAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+    public String execute(HttpServletRequest request) throws SQLException {
 
 
         String tableName = request.getParameter("TableName");

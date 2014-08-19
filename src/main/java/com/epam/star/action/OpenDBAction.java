@@ -14,7 +14,7 @@ public class OpenDBAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenDBAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+    public String execute(HttpServletRequest request) throws SQLException {
 
             try {
                 Class.forName("org.h2.Driver");

@@ -82,20 +82,26 @@
                 <div class="panel panel-default tablePanel" style="overflow-y: scroll;">
                     <%--<div class="panel-heading">Текущая таблица</div>--%>
                     <table class="table table-hover">
-                        <tr>
-                            <c:forEach var="title" items="${titlesOfColumns}">
-                            <th>${title.getElement()}</th>
-                            </c:forEach>
-                        </tr>
+                        <%--<tr>--%>
+                            <%--<c:forEach var="title" items="${titlesOfColumns}">--%>
+                            <%--<th>${title.getElement()}</th>--%>
+                            <%--</c:forEach>--%>
+                        <%--</tr>--%>
 
-                        <c:forEach var="row" items="${result}">
+                        <%--<c:forEach var="row" items="${result}">--%>
+                            <%--<tr>--%>
+                                <%--<c:forEach var="element" items="${row}">--%>
+                                <%--<td><b> ${element.getElement()}</b>--%>
+                                <%--</td>--%>
+                                <%--</c:forEach>--%>
+                            <%--</tr>--%>
+                        <%--</c:forEach>--%>
                             <tr>
-                                <c:forEach var="element" items="${row}">
-                                <td><b> ${element.getElement()}</b>
-                                </td>
+                                <c:forEach var="element" items="${client}">
+                                    <td><b> ${element}</b>
+                                    </td>
                                 </c:forEach>
                             </tr>
-                        </c:forEach>
                     </table>
                 </div>
 
