@@ -12,24 +12,36 @@
         <link rel='stylesheet' href='<c:url value="/webjars/bootstrap/3.2.0/css/bootstrap.min.css"/>'>
         <link rel='stylesheet' href='<c:url value="/style/index.css"/>'>
     </head>
-    <body>
+    <body background="style/img/background.jpg" onload="">
+
+    <input type="" name="actionName" value="indexAction">
+    <%--<c:redirect url="/controller"/>--%>
 
 
-    <div class="main">
-        <div class="authentication">
-            <c:if test="${user.length() > 0}">
-                <div id="autorized">
-                    <label id="Welcome">Welcome</label>
+
+    <div class="main panel panel-default">
+        <div class="authentication panel panel-default">
+            <c:if test="${not empty user}">
+                <div id="autorized" class="border panel panel-default">
+                    <label id="Welcome">Welcome ${user.getFirstName()}</label>
+                    <br>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Exit
+                    </button>
                 </div>
             </c:if>
-            <c:if test="${user.length() == null}">
-                <div id="unAutorized">
+            <c:if test="${empty user}">
+                <div id="unAutorized" class="border panel panel-default">
                     <form action="${pageContext.request.contextPath}/controller" method="post">
-                        <label >Login</label>
-                        <br><input type="text" name="authenticationLogin" value="Vano34">
-                        <label>Password</label>
-                        <br><input type="text" name="authenticationPassword" value="101287">
-                        <input type="submit" value="Login">
+                        <label for="inputLogin" class="label">Login</label>
+                        <input type="text" name="authenticationLogin" class="form-control" id="inputLogin" value="Vano34">
+                        <label for="inputPassword" class="label">Password</label>
+                        <input type="text" name="authenticationPassword" class="form-control" id="inputPassword" value="101287">
+                        <input type="submit" class="loginbtn btn btn-primary" value="Login">
+                        <button class="registrationbtn btn btn-primary" data-toggle="modal" data-target="#myModal">
+                            Registration
+                        </button>
+
                         <input type="hidden" name="TableName" value="Clients">
                         <input type="hidden" name="actionName" value="LoginAction">
                     </form>
@@ -38,7 +50,7 @@
 
         </div>
 
-        <div class="banner">
+        <div class="banner panel panel-default">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -50,10 +62,10 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="..." alt="...">
+                        <img src="style/img/background.jpg" alt="...">
 
                         <div class="carousel-caption">
-                            ...
+
                         </div>
                     </div>
                     <div class="item">
@@ -76,9 +88,10 @@
             </div>
         </div>
 
-        <%--<c:<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--%>
-
-        <div class="contactInformation" style="overflow-y: scroll">
+        <div class="contactInformation panel panel-default" style="overflow-y: scroll">
+            <c:forEach var="contact" items="${contacts}">
+                <label>${contact.owner}: ${contact.telephone}</label>
+            </c:forEach>
             <label>Rodion Starodubenko: +77003996925</label>
             <label>Rodion Starodubenko: +77003996925</label>
             <label>Rodion Starodubenko: +77003996925</label>
@@ -99,10 +112,6 @@
             <input type="hidden" name="actionName" value="DeleteFromDataBaseAction"> //
         </form>
     </div>
-
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Registration
-    </button>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ClientDao extends Dao<Client> {
 
+    public Client findByLogin(String name) throws SQLException;
     public Client findByName(String name) throws SQLException;
     public Client findBySurnameName(String surName);
     public Client findByAddress(String address);

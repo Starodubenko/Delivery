@@ -2,6 +2,7 @@ package com.epam.star.action;
 
 import com.epam.star.H2dao.DaoFactory;
 import com.epam.star.dao.ClientDao;
+import com.epam.star.entity.AbstractUser;
 import com.epam.star.entity.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class LoginAction implements Action {
             String login = request.getParameter("authenticationLogin");
             String password = request.getParameter("authenticationPassword");
 
-            String user = null;
+            AbstractUser user = null;
             String userType = null;
             Boolean f = true;
 
@@ -35,7 +36,7 @@ public class LoginAction implements Action {
             String loginFromDB = clients.get(i).getLogin();
             String passwordFromDB = clients.get(i).getPassword();
             if (login.equals(loginFromDB) && password.equals(passwordFromDB)){
-                user = clients.get(i).getFirstName() + " " + clients.get(i).getLastName();
+                user = clients.get(i);
                 userType = "client";
                 f = false;
 
@@ -47,9 +48,6 @@ public class LoginAction implements Action {
         }
 
             LOGGER.debug("Name and Surname obtained in the case, if authentication is successful : {}",user);
-
-//            request.setAttribute("user", user);
-//            request.setAttribute("userType", userType);
 
         return "index.jsp";
     }

@@ -32,6 +32,7 @@ public class Controller extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 //        } catch (ClassNotFoundException e) { //todo use ActionException!!!!!!!!!!!!! and log exception and then send error
 //            e.printStackTrace(); // todo but if you would use error handler servlet you could skip exception handling here because e.h. would do it
 //        } catch (SQLException e) {

@@ -14,10 +14,24 @@ public class H2ClientDao extends AbstractH2Dao implements ClientDao {
     private static final String ADD_CLIENT = "INSERT INTO  USERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String DELETE_CLIENT = "DELETE FROM clients WHERE id = ?";
     private Connection conn;
-    private String query;
 
     public H2ClientDao(Connection conn) {
         this.conn = conn;
+    }
+
+    @Override
+    public Client findByLogin(String login) throws SQLException {
+        String sql = "select * from clients where login = " + "'" + login + "'";
+
+        PreparedStatement prstm = null;
+        ResultSet resultSet = null;
+        try {
+            prstm = conn.prepareStatement(sql);
+            resultSet = prstm.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return getClientFromResultSet(resultSet);
     }
 
     @Override

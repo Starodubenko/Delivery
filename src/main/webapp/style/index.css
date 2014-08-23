@@ -1,9 +1,14 @@
+#body{
+    background: url("img/background.jpg");
+    background-size: 100%;
+}
 
 .main{
     width: 1282px;
     height: 1000px;
     margin: 20px auto;
     background-color: darkgray;
+    /*width: 100%;*/
 }
 
 .contactInformation{
@@ -28,9 +33,7 @@
 .authentication{
     width: 200px;
     margin: 10px;
-    background-color: cadetblue;
     float: right;
-
 }
 
 .registration{
@@ -45,4 +48,21 @@ label{
 
 text{
     margin: 2px;
+}
+
+.registrationbtn{
+    padding: 5;
+    margin: 10px;
+    float: right;
+}
+
+.loginbtn{
+    padding: 5;
+    margin: 10px;
+}
+
+.border{
+    margin: 5px;
+    border: solid;
+    border-color: darkgray;
 }

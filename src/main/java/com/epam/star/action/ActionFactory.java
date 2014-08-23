@@ -21,6 +21,8 @@ public class ActionFactory {
         actions.put("GET/LoginAction", new LoginAction());//new ShowPageAction("/WEB-INF/result.jsp"));
         actions.put("POST/DeleteFromDataBaseAction", new DeleteFromDataBaseAction());
         actions.put("GET/DeleteFromDataBaseAction", new DeleteFromDataBaseAction());//new ShowPageAction("/WEB-INF/result.jsp"));
+        actions.put("POST/IndexAction", new IndexAction());
+        actions.put("GET/IndexAction", new IndexAction());//new ShowPageAction("/WEB-INF/result.jsp"));
 //        actions.put("POST/registration", new RegistrationAction());
 //        actions.put("GET/registration", new ShowPageAction("registration"));
 
