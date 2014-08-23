@@ -1,10 +1,15 @@
 package com.epam.star.action;
 
+import com.epam.star.H2dao.DaoFactory;
+import com.epam.star.dao.ClientDao;
+import com.epam.star.entity.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.*;
+import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.List;
 
 @Post
 public class LoginAction implements Action {
@@ -13,43 +18,39 @@ public class LoginAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request) throws SQLException {
-        String tableName = request.getParameter("TableName");
-        System.out.println(tableName);
-        if (tableName != null && tableName != "") {
 
-            try {
-                Class.forName("org.h2.Driver");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            Connection connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/F:/Видео Epam/db/FPDB", "Rody", "1");
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("SELECT LOGIN,PASSWORD,FIRSTNAME,LASTNAME FROM " + tableName);
-            ResultSetMetaData resultSetMD = resultSet.getMetaData();
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        ClientDao clientDao = daoFactory.getClientDao();
+        List<Client> clients = clientDao.getAllClients();
 
             String login = request.getParameter("authenticationLogin");
             String password = request.getParameter("authenticationPassword");
 
-            String result = null;
+            String user = null;
+            String userType = null;
             Boolean f = true;
-            while (resultSet.next() && f == true) {
 
-                int row = resultSet.getRow();
-                    String loginFromDB = resultSet.getString("LOGIN");
-                    String passwordFromDB = resultSet.getString("PASSWORD");
-                    if (login.equals(loginFromDB) && password.equals(passwordFromDB)){
-                        result = resultSet.getString("FIRSTNAME") + " " + resultSet.getString("LASTNAME");
-                        f = false;
-                    }
+        int i = 0;
+        while (i<clients.size() && f){
+            String loginFromDB = clients.get(i).getLogin();
+            String passwordFromDB = clients.get(i).getPassword();
+            if (login.equals(loginFromDB) && password.equals(passwordFromDB)){
+                user = clients.get(i).getFirstName() + " " + clients.get(i).getLastName();
+                userType = "client";
+                f = false;
+
+                HttpSession session =  request.getSession();
+                session.setAttribute("user", user);
+                session.setAttribute("userType", userType);
             }
-
-            LOGGER.debug("Name and Surname obtained in the case, if authentication is successful : {}",result);
-
-            request.setAttribute("user", result);
-            connection.close();
+            i++;
         }
+
+            LOGGER.debug("Name and Surname obtained in the case, if authentication is successful : {}",user);
+
+//            request.setAttribute("user", user);
+//            request.setAttribute("userType", userType);
+
         return "index.jsp";
     }
 }

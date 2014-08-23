@@ -2,7 +2,6 @@ package com.epam.star.H2dao;
 
 import com.epam.star.dao.ClientDao;
 import com.epam.star.entity.Client;
-import com.epam.star.entity.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +11,8 @@ import java.util.List;
 
 public class H2ClientDao extends AbstractH2Dao implements ClientDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(H2ClientDao.class);
+    private static final String ADD_CLIENT = "INSERT INTO  USERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String DELETE_CLIENT = "DELETE FROM clients WHERE id = ?";
     private Connection conn;
     private String query;
 
@@ -20,8 +21,9 @@ public class H2ClientDao extends AbstractH2Dao implements ClientDao {
     }
 
     @Override
-    public Client findByName(String name){
+    public Client findByName(String name) {
         String sql = "select * from clients where firstname = " + "'" + name + "'";
+
         PreparedStatement prstm = null;
         ResultSet resultSet = null;
         try {
@@ -90,6 +92,26 @@ public class H2ClientDao extends AbstractH2Dao implements ClientDao {
     }
 
     @Override
+    public List<Client> getAllClients() {
+        List<Client> result = new ArrayList<>();
+
+        Statement statement = null;
+        try {
+            statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * " +
+                    "FROM USERS inner join POSITIONS " +
+                    "on users.POSITION_ID = positions.id where POSITION_ID = 11");
+            ResultSetMetaData resultSetMD = resultSet.getMetaData();
+            while (resultSet.next()){
+                result.add(getClientFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
     public Client getElement(int ID) {
         String sql = "select * from clients where id = " + "'" + ID + "'";
         PreparedStatement prstm = null;
@@ -104,62 +126,85 @@ public class H2ClientDao extends AbstractH2Dao implements ClientDao {
     }
 
     @Override
-    public void addElement(Client e) {
-        String sql = "select * from clients";
+    public String addElement(String[] parameterValues) {
+
+        String status = "Client do not added";
+
+        Client client = getClientFromParameterValues(parameterValues);
+
         PreparedStatement prstm = null;
-        ResultSet resultSet = null;
-        ResultSetMetaData resultSetMD = null;
-        List<Element> namesOfColumns = new ArrayList<>();
-        try {
-            prstm = conn.prepareStatement(sql);
-            resultSet = prstm.executeQuery();
-            resultSetMD = resultSet.getMetaData();
-            int i = 2;
-            while(i <= resultSetMD.getColumnCount()){
-                if (resultSetMD.getColumnName(i) != "ID")
-                    namesOfColumns.add(new Element(resultSetMD.getColumnName(i)));
-                i++;
+
+            try {
+                prstm = conn.prepareStatement(ADD_CLIENT);
+                prstm.setString(1, null);
+                prstm.setString(2, client.getLogin());
+                prstm.setString(3, client.getPassword());
+                prstm.setString(4, client.getFirstName());
+                prstm.setString(5, client.getLastName());
+                prstm.setString(6, client.getMiddleName());
+                prstm.setString(7, client.getAddress());
+                prstm.setString(8, client.getTelephone());
+                prstm.setString(9, client.getMobilephone());
+                prstm.setString(10, null);
+                prstm.setString(11, null);
+                prstm.setString(12, null);
+                prstm.setString(13, null);
+                prstm.setString(14, "11");
+                prstm.execute();
+                status = "Client successfully added";
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (prstm != null) {
+                    try {
+                        prstm.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) { /* ignored */}
+                }
             }
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
+        return status;
+    }
 
-        String valuesString = "(";
-        String colsNamesString = "(";
+    @Override
+    public String deleteElement(int ID) {
+        String status = "Client do not deleted";
 
-        String[] parameters = (String[]) e.getUserFieldsNames().toArray();
-        for (String parameter : parameters) {
-            valuesString = valuesString + "'" + parameter + "'" +",";
-        }
-        valuesString = valuesString.substring(0,valuesString.length()-1) + ")";
-        LOGGER.debug("String created for values of construction which insert data to database: {}",valuesString);
+        PreparedStatement prstm = null;
 
-        for (Element nameOfColumn : namesOfColumns) {
-            colsNamesString = colsNamesString + nameOfColumn.getElement() + ",";
-        }
-        colsNamesString = colsNamesString.substring(0,colsNamesString.length()-1) + ")";
-        LOGGER.debug("String created for names of columns of table of construction which insert data to database: {}", namesOfColumns);
         try {
-            prstm.execute("insert into clients" + colsNamesString + " values " + valuesString);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+            prstm = conn.prepareStatement(DELETE_CLIENT);
+            prstm.setString(1, String.valueOf(ID));
+            prstm.execute();
+            status = "Client successfully deleted";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (prstm != null) {
+                try {
+                    prstm.close();
+                } catch (SQLException e) { /* ignored */}
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) { /* ignored */}
+            }
         }
+        return status;
     }
 
     @Override
-    public Client deleteElement(int ID) {
+    public String updateElement(int ID) {
         return null;
     }
 
-    @Override
-    public Client updateElement(int ID) {
-        return null;
-    }
-
-    private Client getClientFromResultSet(ResultSet resultSet){
+    private Client getClientFromResultSet(ResultSet resultSet) {
         Client client = new Client();
         try {
-            resultSet.next();
             client.setId(resultSet.getInt("id"));
             client.setLogin(resultSet.getString("login"));
             client.setPassword(resultSet.getString("password"));
@@ -175,17 +220,16 @@ public class H2ClientDao extends AbstractH2Dao implements ClientDao {
         return client;
     }
 
-    private Client getClientFromParameterValues(String[] parameterValues){
+    private Client getClientFromParameterValues(String[] parameterValues) {
         Client client = new Client();
-            client.setId(Integer.parseInt(parameterValues[0]));
-            client.setLogin(parameterValues[1]);
-            client.setPassword(parameterValues[2]);
-            client.setFirstName(parameterValues[3]);
-            client.setLastName(parameterValues[4]);
-            client.setMiddleName(parameterValues[5]);
-            client.setAddress(parameterValues[6]);
-            client.setTelephone(parameterValues[7]);
-            client.setMobilephone(parameterValues[8]);
+        client.setLogin(parameterValues[0]);
+        client.setPassword(parameterValues[1]);
+        client.setFirstName(parameterValues[2]);
+        client.setLastName(parameterValues[3]);
+        client.setMiddleName(parameterValues[4]);
+        client.setAddress(parameterValues[5]);
+        client.setTelephone(parameterValues[6]);
+        client.setMobilephone(parameterValues[7]);
         return client;
     }
 }

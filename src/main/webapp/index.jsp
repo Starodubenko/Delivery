@@ -17,20 +17,25 @@
 
     <div class="main">
         <div class="authentication">
-            <div id="autorized" onload="loginFormVisible(${user})">
-                <label id="Welcome">Welcome</label>
-            </div>
-            <div id="unAutorized" onload="loginFormVisible(${user})">
-                <form method="post">
-                    <label >Login</label>
-                    <br><input type="text" name="authenticationLogin" value="Vano34">
-                    <label>Password</label>
-                    <br><input type="text" name="authenticationPassword" value="101287">
-                    <input type="submit" value="Login">
-                    <input type="hidden" name="TableName" value="Clients">
-                    <input type="hidden" name="actionName" value="loginaction">
-                </form>
-            </div>
+            <c:if test="${user.length() > 0}">
+                <div id="autorized">
+                    <label id="Welcome">Welcome</label>
+                </div>
+            </c:if>
+            <c:if test="${user.length() == null}">
+                <div id="unAutorized">
+                    <form action="${pageContext.request.contextPath}/controller" method="post">
+                        <label >Login</label>
+                        <br><input type="text" name="authenticationLogin" value="Vano34">
+                        <label>Password</label>
+                        <br><input type="text" name="authenticationPassword" value="101287">
+                        <input type="submit" value="Login">
+                        <input type="hidden" name="TableName" value="Clients">
+                        <input type="hidden" name="actionName" value="LoginAction">
+                    </form>
+                </div>
+            </c:if>
+
         </div>
 
         <div class="banner">
@@ -108,46 +113,46 @@
                     <h4 class="modal-title" id="myModalLabel">Registration form</h4>
                 </div>
                     <%--<c:forEach var="title" items="${titlesOfColumns}">--%>
-                <form method="post">
+                <form action="${pageContext.request.contextPath}/controller">
                     <div class="registration">
                         <div class="form-group">
                             <label for="Login" class="label">Login</label>
-                            <input type="text" name="ValuesForInsertToDB" value="Ivanov99" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="Ivanov99" class="form-control"
                                    id="Login">
                         </div>
                         <div class="form-group">
                             <label for="Password" class="label">Password</label>
-                            <input type="text" name="ValuesForInsertToDB" value="Ivanov9" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="Ivanov9" class="form-control"
                                    id="Password">
                         </div>
                         <div class="form-group">
                             <label for="Firsname" class="label">Firsname</label>
-                            <input type="text" name="ValuesForInsertToDB" value="Ivan" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="Ivan" class="form-control"
                                    id="Firsname">
                         </div>
                         <div class="form-group">
                             <label for="Lastname" class="label">Lastname</label>
-                            <input type="text" name="ValuesForInsertToDB" value="Ivanov" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="Ivanov" class="form-control"
                                    id="Lastname">
                         </div>
                         <div class="form-group">
                             <label for="Middlename" class="label">Middlename</label>
-                            <input type="text" name="ValuesForInsertToDB" value="Ivanovich" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="Ivanovich" class="form-control"
                                    id="Middlename">
                         </div>
                         <div class="form-group">
                             <label for="Address" class="label">Address</label>
-                            <input type="text" name="ValuesForInsertToDB" value="Ivanova-32" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="Ivanova-32" class="form-control"
                                    id="Address">
                         </div>
                         <div class="form-group">
                             <label for="Telephone" class="label">Telephone</label>
-                            <input type="text" name="ValuesForInsertToDB" value="87212965896" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="87212965896" class="form-control"
                                    id="Telephone">
                         </div>
                         <div class="form-group">
                             <label for="Mobilephone" class="label">Mobilephone</label>
-                            <input type="text" name="ValuesForInsertToDB" value="87007778958" class="form-control"
+                            <input type="text" name="RegistrationFormValues" value="87007778958" class="form-control"
                                    id="Mobilephone">
                         </div>
                     </div>
@@ -157,7 +162,7 @@
                         </button>
                         <button type="submit" class="btn btn-primary">Registration</button>
                     </div>
-                    <input type="hidden" name="actionName" value="inserttodbaction">
+                    <input type="hidden" name="actionName" value="ClientRegistrationAction">
                     <input type="hidden" name="TableName" value="Clients">
                 </form>
             </div>

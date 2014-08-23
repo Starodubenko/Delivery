@@ -1,8 +1,5 @@
 package com.epam.star.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Client extends AbstractUser {
     private String mobilephone;
 
@@ -24,17 +21,4 @@ public class Client extends AbstractUser {
         this.mobilephone = mobilephone;
     }
 
-    public List<String> getUserFieldsNames(){
-        List<String> result = new ArrayList<>();
-        result.add(String.valueOf(getId()));
-        result.add(getLogin());
-        result.add(getPassword());
-        result.add(getFirstName());
-        result.add(getLastName());
-        result.add(getMiddleName());
-        result.add(getAddress());
-        result.add(getTelephone());
-        result.add(getMobilephone());
-        return result;
-    }
 }

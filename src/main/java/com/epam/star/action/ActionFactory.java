@@ -15,6 +15,10 @@ public class ActionFactory {
 //        Reflections reflections = new Reflections(ActionFactory.class.getPackage().getName());
 //        Set<Class<? extends Action>> actions = reflections.getSubTypesOf(Action.class);
 
+        actions.put("POST/ClientRegistrationAction", new ClientRergistrationAction());
+        actions.put("GET/ClientRegistrationAction", new ClientRergistrationAction());//new ShowPageAction("/WEB-INF/result.jsp"));
+        actions.put("POST/LoginAction", new LoginAction());
+        actions.put("GET/LoginAction", new LoginAction());//new ShowPageAction("/WEB-INF/result.jsp"));
         actions.put("POST/DeleteFromDataBaseAction", new DeleteFromDataBaseAction());
         actions.put("GET/DeleteFromDataBaseAction", new DeleteFromDataBaseAction());//new ShowPageAction("/WEB-INF/result.jsp"));
 //        actions.put("POST/registration", new RegistrationAction());

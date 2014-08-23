@@ -22,11 +22,7 @@ public class DeleteFromDataBaseAction implements Action {
         ClientDao clientDao = daoFactory.getClientDao();
         Client client = clientDao.findByName("Lina");
 
-        LOGGER.info("Fields of clientEntity{}", client.getUserFieldsNames());
 
-        request.setAttribute("client", client.getUserFieldsNames());
-//        request.setAttribute("row",row);
-//        request.setAttribute("clientFields",classFields);
 
         return "/WEB-INF/result.jsp";
     }
