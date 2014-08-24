@@ -14,7 +14,7 @@ public class DeleteFromDataBaseAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(GetDataFromDataBaseAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws SQLException{
+    public ActionResult execute(HttpServletRequest request) throws SQLException{
         String tableName = request.getParameter("TableName");
         LOGGER.debug("Name of table which got in GetDataFromDBAction: {}", tableName);
 
@@ -24,6 +24,6 @@ public class DeleteFromDataBaseAction implements Action {
 
 
 
-        return "/WEB-INF/result.jsp";
+        return null;
     }
 }

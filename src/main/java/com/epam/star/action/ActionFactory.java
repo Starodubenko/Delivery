@@ -16,13 +16,13 @@ public class ActionFactory {
 //        Set<Class<? extends Action>> actions = reflections.getSubTypesOf(Action.class);
 
         actions.put("POST/ClientRegistrationAction", new ClientRergistrationAction());
-        actions.put("GET/ClientRegistrationAction", new ClientRergistrationAction());//new ShowPageAction("/WEB-INF/result.jsp"));
+        actions.put("GET/ClientRegistrationAction", new ShowPageAction("/WEB-INF/login.jsp"));//new ShowPageAction("/WEB-INF/result.jsp"));
         actions.put("POST/LoginAction", new LoginAction());
-        actions.put("GET/LoginAction", new LoginAction());//new ShowPageAction("/WEB-INF/result.jsp"));
+        actions.put("GET/LoginAction", new ShowPageAction("/WEB-INF/login.jsp"));//LoginAction());
         actions.put("POST/DeleteFromDataBaseAction", new DeleteFromDataBaseAction());
         actions.put("GET/DeleteFromDataBaseAction", new DeleteFromDataBaseAction());//new ShowPageAction("/WEB-INF/result.jsp"));
         actions.put("POST/IndexAction", new IndexAction());
-        actions.put("GET/IndexAction", new IndexAction());//new ShowPageAction("/WEB-INF/result.jsp"));
+        actions.put("GET/IndexAction", new ShowPageAction("/WEB-INF/login.jsp"));//IndexAction());
 //        actions.put("POST/registration", new RegistrationAction());
 //        actions.put("GET/registration", new ShowPageAction("registration"));
 

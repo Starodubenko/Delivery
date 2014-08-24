@@ -4,6 +4,6 @@
     <title></title>
 </head>
 <body>
-
+        <h1>This is Admin's Page</h1>
 </body>
 </html>

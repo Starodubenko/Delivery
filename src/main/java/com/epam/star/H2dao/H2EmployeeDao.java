@@ -25,19 +25,21 @@ public class H2EmployeeDao extends AbstractH2Dao implements EmployeeDao {
     @Override
     public Employee findByCredentials(String login, String password) {
         String sql = "SELECT *" +
-                "FROM USERS   " +
-                "  inner join POSITIONS" +
-                "    on users.POSITION_ID = positions.id" +
-                "where POSITION_ID != 11 and LOGIN = " + "'" + login + "'" + "and PASSWORD = " + "'" + password + "'";
+                " FROM USERS" +
+                " inner join POSITIONS" +
+                " on users.POSITION_ID = positions.id" +
+                " where POSITION_ID != 11 and LOGIN = " + "'" + login + "'" + "and PASSWORD = " + "'" + password + "'";
         PreparedStatement prstm = null;
         ResultSet resultSet = null;
         try {
             prstm = conn.prepareStatement(sql);
             resultSet = prstm.executeQuery();
+            if (resultSet.next())
+                return getClientFromResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return getClientFromResultSet(resultSet);
+        return  null;
     }
 
     @Override
@@ -72,6 +74,7 @@ public class H2EmployeeDao extends AbstractH2Dao implements EmployeeDao {
             employee.setAddress(resultSet.getString("address"));
             employee.setTelephone(resultSet.getString("telephone"));
             employee.setMobilephone(resultSet.getString("mobilephone"));
+            employee.setRole(resultSet.getString("position_name"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

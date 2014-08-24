@@ -14,7 +14,7 @@ public class InsertToDataBaseAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(InsertToDataBaseAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws SQLException {
+    public ActionResult execute(HttpServletRequest request) throws SQLException {
 
 
         String tableName = request.getParameter("TableName");
@@ -62,7 +62,7 @@ public class InsertToDataBaseAction implements Action {
 
             connection.close();
         }
-        return "index.jsp";
+        return null;
     }
 
     private String FirsUpperSymbol(String s){

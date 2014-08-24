@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class ClientRergistrationAction implements Action {
     @Override
-    public String execute(HttpServletRequest request) throws ActionException, SQLException {
+    public ActionResult execute(HttpServletRequest request) throws ActionException, SQLException {
 
         String[] parameters = request.getParameterValues("RegistrationFormValues");
 
@@ -16,6 +16,6 @@ public class ClientRergistrationAction implements Action {
         ClientDao clientDao = daoFactory.getClientDao();
         clientDao.addElement(parameters);
 
-        return "index.jsp";
+        return null;
     }
 }

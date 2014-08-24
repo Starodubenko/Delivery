@@ -14,7 +14,7 @@ public class OpenDBAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenDBAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws SQLException {
+    public ActionResult execute(HttpServletRequest request) throws SQLException {
 
             try {
                 Class.forName("org.h2.Driver");
@@ -38,6 +38,6 @@ public class OpenDBAction implements Action {
             request.setAttribute("namesOfTables", namesOfTables);
             connection.close();
 
-        return "/WEB-INF/result.jsp";
+        return null;
     }
 }

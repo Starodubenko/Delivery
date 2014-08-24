@@ -15,7 +15,7 @@ public class GetDataFromDataBaseAction implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(GetDataFromDataBaseAction.class);
 
     @Override
-    public String execute(HttpServletRequest request) throws ActionException, SQLException {
+    public ActionResult execute(HttpServletRequest request) throws ActionException, SQLException {
         String tableName = request.getParameter("TableName");
         LOGGER.debug("Name of table which got in GetDataFromDBAction: {}", tableName);
         if (tableName != null && tableName != "") {
@@ -48,7 +48,7 @@ public class GetDataFromDataBaseAction implements Action {
 
             ConnectionPool.addConnectionToPool(connection);
         }
-            return "/WEB-INF/result.jsp";
+            return null;
     }
 
     private String FirsUpperSymbol(String s){

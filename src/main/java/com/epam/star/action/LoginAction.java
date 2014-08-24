@@ -16,7 +16,7 @@ public class LoginAction implements Action {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAction.class);
     private ActionResult loginn = new ActionResult("login");
-    private ActionResult userr = new ActionResult("user",true);
+    private ActionResult userr = new ActionResult("user");
     private ActionResult dispatcher = new ActionResult("dispatcher",true);
     private ActionResult admin = new ActionResult("admin",true);
     private ActionResult director = new ActionResult("director",true);

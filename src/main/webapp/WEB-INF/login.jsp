@@ -25,7 +25,7 @@
             </c:if>
             <c:if test="${empty user}">
                 <div id="unAutorized" class="border panel panel-default">
-                    <form action="${pageContext.request.contextPath}/do/LoginAction" method="post">
+                    <form action="${pageContext.request.contextPath}/do/Login" method="post">
                         <label for="inputLogin" class="label">Login</label>
                         <input type="text" name="authenticationLogin" class="form-control" id="inputLogin" value="Vano34">
                         <label for="inputPassword" class="label">Password</label>
@@ -95,13 +95,13 @@
             <c:forEach var="contact" items="${contacts}">
                 <label>${contact.owner}: ${contact.telephone}</label>
             </c:forEach>
-            <label>Rodion Starodubenko: +77003996925</label>
-            <label>Rodion Starodubenko: +77003996925</label>
-            <label>Rodion Starodubenko: +77003996925</label>
-            <label>Rodion Starodubenko: +77003996925</label>
-            <label>Rodion Starodubenko: +77003996925</label>
-            <label>Rodion Starodubenko: +77003996925</label>
-            <label>Rodion Starodubenko: +77003996925</label>
+            <%--<label>Rodion Starodubenko: +77003996925</label>--%>
+            <%--<label>Rodion Starodubenko: +77003996925</label>--%>
+            <%--<label>Rodion Starodubenko: +77003996925</label>--%>
+            <%--<label>Rodion Starodubenko: +77003996925</label>--%>
+            <%--<label>Rodion Starodubenko: +77003996925</label>--%>
+            <%--<label>Rodion Starodubenko: +77003996925</label>--%>
+            <%--<label>Rodion Starodubenko: +77003996925</label>--%>
         </div>
     </div>
 
@@ -124,8 +124,7 @@
                             aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">Registration form</h4>
                 </div>
-                    <%--<c:forEach var="title" items="${titlesOfColumns}">--%>
-                <form action="${pageContext.request.contextPath}/controller">
+                <form action="${pageContext.request.contextPath}/do/ClientRegistrationAction">
                     <div class="registration">
                         <div class="form-group">
                             <label for="Login" class="label">Login</label>
@@ -168,7 +167,6 @@
                                    id="Mobilephone">
                         </div>
                     </div>
-                        <%--</c:forEach>--%>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close registration form
                         </button>

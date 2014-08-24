@@ -25,11 +25,11 @@ public class ActionResult {
         this.view = view;
     }
 
-    public boolean isRedirection() {
+    public boolean isRedirect() {
         return redirection;
     }
 
-    public void setRedirection(boolean redirection) {
+    public void setRedirect(boolean redirection) {
         this.redirection = redirection;
     }
 }
