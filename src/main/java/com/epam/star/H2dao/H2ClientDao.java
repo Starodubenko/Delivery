@@ -106,6 +106,24 @@ public class H2ClientDao extends AbstractH2Dao implements ClientDao {
     }
 
     @Override
+    public Client findByCredentials(String login, String password) {
+        String sql = "SELECT *" +
+                "FROM USERS   " +
+                "  inner join POSITIONS" +
+                "    on users.POSITION_ID = positions.id" +
+                "where POSITION_ID = 11 and LOGIN = " + "'" + login + "'" + "and PASSWORD = " + "'" + password + "'";
+        PreparedStatement prstm = null;
+        ResultSet resultSet = null;
+        try {
+            prstm = conn.prepareStatement(sql);
+            resultSet = prstm.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return getClientFromResultSet(resultSet);
+    }
+
+    @Override
     public List<Client> getAllClients() {
         List<Client> result = new ArrayList<>();
 

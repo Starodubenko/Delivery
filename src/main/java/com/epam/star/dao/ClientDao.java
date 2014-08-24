@@ -13,5 +13,6 @@ public interface ClientDao extends Dao<Client> {
     public Client findByAddress(String address);
     public Client findByTelephone(String telephone);
     public Client findByMobilephone(String telephone);
+    public Client findByCredentials(String login, String password);
     public List<Client> getAllClients();
 }

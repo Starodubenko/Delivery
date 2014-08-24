@@ -48,4 +48,9 @@ public class DaoFactory {
         Connection connection = connectionPool.getConnection();
         return new H2IndexDao(connection);
     }
+
+    public H2EmployeeDao getEmployeeDao() throws SQLException {
+        Connection connection = connectionPool.getConnection();
+        return new H2EmployeeDao(connection);
+    }
 }

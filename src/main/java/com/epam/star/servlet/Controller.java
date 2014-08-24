@@ -21,9 +21,10 @@ public class Controller extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String actionName = req.getMethod() + "/" + req.getParameter("actionName");
+        String actionNamee = req.getMethod() + req.getPathInfo();
         LOGGER.debug("Action name which was obtained in Controller: {}", actionName);
 
-        Action action = ActionFactory.getAction(actionName);
+        Action action = ActionFactory.getAction(actionNamee);
         String reuslt = null;
         try {
             reuslt = action.execute(req);
@@ -32,12 +33,11 @@ public class Controller extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-//        } catch (ClassNotFoundException e) { //todo use ActionException!!!!!!!!!!!!! and log exception and then send error
-//            e.printStackTrace(); // todo but if you would use error handler servlet you could skip exception handling here because e.h. would do it
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-        req.getRequestDispatcher(reuslt).forward(req, resp); //todo use Redirect or Forward, but not forward only!!!bk
+        if (actionResult.isRedirect()) {
+            resp.sendRedirect(actionResult.getView()); //redirect goes to some action (/do/welcome or something like that)
+            return;
+        }
+        //forward goes to some page (welcome.jsp index.jsp etc) so you need to add "/WEB-INF/" "jsp" here or in every action
+        req.getRequestDispatcher(actionResult.getView()).forward(req, resp); //todo use Redirect or Forward, but not forward only!!!bk
     }
 }
